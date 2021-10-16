@@ -1,7 +1,8 @@
 import music21 as m21
 import numpy as np
-from utils import frequency_to_notes, midi_to_hertz
-from plot import plot_time_frequency
+
+from .utils import frequency_to_notes, midi_to_hertz
+from .plot import plot_time_frequency
 
 
 class Pitch:
@@ -68,7 +69,7 @@ class Piece:
         p_roll = np.zeros((len(frequency_vector), len(time_vector)))
 
         for note in self.notes:
-            if type(note) is Note:
+            if isinstance(note, Note):
                 freq = midi_to_hertz(note.note_number)
                 time_start = note.start_seconds
                 time_end = note.end_seconds
@@ -91,31 +92,3 @@ class Piece:
                                   v_min=0, v_max=128, c_map='Greys', freq_type=str, freq_label='Notes',
                                   freq_names=notes_vector)
         return fig
-
-
-if __name__ == '__main__':
-
-    _piece = Piece("Example")
-    _note_1 = Note(69, 80, 0., 1.)
-    _note_2 = Note(71, 100, 0.5, 1.4)
-    _note_3 = Note(72, 120, 1., 2.)
-    _piece.notes.append(_note_1)
-    _piece.notes.append(_note_2)
-    _piece.notes.append(_note_3)
-
-    print(_piece)
-    print("Length of " + _piece.name + ":", len(_piece.notes))
-    print("Duration of " + _piece.name + ":", _piece.duration())
-
-    # Frequency parameters
-    _f_min = 27.5  # La 0
-    _bins_per_octave = 12
-    _n_bins = int(_bins_per_octave * (7 + 1/3))  # number of bins of a piano
-
-    # Times parameters
-    time_resolution = 0.001  # ms resolution
-
-    # Plot
-    _frequency_vector = _f_min * 2**(np.arange(_n_bins) / _bins_per_octave)
-    _time_vector = np.arange(0, _piece.duration(), time_resolution)
-    _piece.piano_roll(_frequency_vector, _time_vector, bins_per_octave=_bins_per_octave, semitone_width=1)

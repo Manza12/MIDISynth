@@ -1,6 +1,7 @@
-import matplotlib.pyplot as plt
 from datetime import time as tm
 import math
+
+import matplotlib.pyplot as plt
 import matplotlib.ticker as tick
 
 

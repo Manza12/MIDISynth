@@ -1,8 +1,9 @@
-from music import Note, Piece
 from pathlib import Path
 import mido as mid
 
-from utils import ticks2seconds
+from .music import Note, Piece
+from .utils import ticks2seconds
+
 
 
 def print_messages(midi):
@@ -17,9 +18,9 @@ def check_pedal(midi):
         if msg.type == 'control_change':
             if msg.control == 64:
                 Warning('There is pedal')
-                return False
+                return True
             else:
-                Exception("Control change not handled")
+                raise Exception("Control change not handled")
     return False
 
 
@@ -57,25 +58,3 @@ def midi2piece(file_name: str, file_folder: str, final_rest: float = 0.):
         raise Exception("Pedal not integrated yet")
 
     return piece
-
-
-if __name__ == '__main__':
-    import numpy as np
-
-    _file_name = 'tempest'
-    _file_folder = 'midi'
-    _piece = midi2piece(_file_name, _file_folder, 1.)
-    _piece.__str__()
-
-    # Frequency parameters
-    _f_min = 27.5  # La 0
-    _bins_per_octave = 12
-    _n_bins = int(_bins_per_octave * (7 + 1 / 3))  # number of bins of a piano
-
-    # Times parameters
-    time_resolution = 0.001  # ms resolution
-
-    # Plot
-    _frequency_vector = _f_min * 2 ** (np.arange(_n_bins) / _bins_per_octave)
-    _time_vector = np.arange(0, _piece.duration(), time_resolution)
-    _piece.piano_roll(_frequency_vector, _time_vector, bins_per_octave=_bins_per_octave, semitone_width=1)
