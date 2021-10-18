@@ -47,7 +47,7 @@ def format_time(x, pos, t, plot_units=False):
         return ""
 
 
-def plot_time_frequency(a, t, f, v_min=0, v_max=1, c_map='Grays', fig_title=None, show=True, numpy=True,
+def plot_time_frequency(a, t, f, v_min=0, v_max=1, c_map='Greys', fig_title=None, show=True, numpy=True,
                         full_screen=False, fig_size=(640, 480), freq_type=int, freq_label='Frequency (Hz)',
                         time_label='Time (s)', plot_units=False, freq_names=None, dpi=120, backend='Qt5Agg'):
     fig = plt.figure(figsize=(fig_size[0]/dpi, fig_size[1]/dpi), dpi=dpi)

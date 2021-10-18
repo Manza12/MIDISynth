@@ -5,7 +5,6 @@ from .music import Note, Piece
 from .utils import ticks2seconds
 
 
-
 def print_messages(midi):
     for i, track in enumerate(midi.tracks):
         print('Track {}: {}'.format(i, track.name))
@@ -18,15 +17,11 @@ def check_pedal(midi):
         if msg.type == 'control_change':
             if msg.control == 64:
                 Warning('There is pedal')
-                return True
-            else:
-                raise Exception("Control change not handled")
     return False
 
 
-def midi2piece(file_name: str, file_folder: str, final_rest: float = 0.):
-    piece = Piece(file_name, final_rest)
-    file_path = Path(file_folder) / Path(file_name + '.mid')
+def midi2piece(name: str, file_path: Path, final_rest: float = 0.):
+    piece = Piece(name, final_rest)
     midi = mid.MidiFile(file_path)
 
     has_pedal = check_pedal(midi)

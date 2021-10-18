@@ -11,8 +11,9 @@ import numpy as np
 from pathlib import Path
 
 file_name = 'tempest'
-file_folder = Path('..') / Path('data') / Path('midi')
-piece = midi2piece(file_name, file_folder, 1.)
+file_path = Path('..') / Path('data') / Path('midi') \
+              / Path(file_name + 'mid')
+piece = midi2piece(file_name, file_path, 1.)
 piece.__str__()
 
 # Frequency parameters

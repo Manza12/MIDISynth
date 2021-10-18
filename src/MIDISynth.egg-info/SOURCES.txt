@@ -1,5 +1,6 @@
 LICENSE
 README.md
+setup.cfg
 setup.py
 src/MIDISynth/__init__.py
 src/MIDISynth/midi.py

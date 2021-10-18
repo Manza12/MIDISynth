@@ -14,17 +14,20 @@ from pathlib import Path
 
 # MIDI parameters
 file_name = 'tempest'
-file_folder = Path('..') / Path('data') / Path('midi')
-piece = midi2piece(file_name, file_folder, 1.)
+file_path = Path('..') / Path('data') / Path('midi') / Path(file_name + '.mid')
+piece = midi2piece(file_name, file_path, 1.)
 
 # Synthesizer parameters
 attack_time: float = 0.01  # in seconds
 number_harmonics: int = 16
 amplitude_harmonics: str = 'inverse_square'
-decay_harmonics: str = 'logarithmic'
+decay_harmonics: str = 'linear'
 reference_freq: float = 440.
 value_for_reference_freq: float = 0.5
 coefficient: float = 0.001
+linear_dictionary = {'reference_freq': reference_freq,
+                     'value_for_reference_freq': value_for_reference_freq,
+                     'coefficient': coefficient}
 
 # Frequency parameters
 f_min = 27.5  # La 0
@@ -33,9 +36,7 @@ n_bins = int(bins_per_octave * (7 + 1 / 3))  # number of bins of a piano
 frequency_vector = f_min * 2 ** (np.arange(n_bins) / bins_per_octave)
 
 synthesizer = Synthesizer(attack_time, number_harmonics, amplitude_harmonics, 
-                          decay_harmonics, reference_freq=reference_freq, 
-                          value_for_reference_freq=value_for_reference_freq,
-                          coefficient=coefficient)
+                          decay_harmonics, **linear_dictionary)
 
 decays = synthesizer.decay_function(frequency_vector)
 
