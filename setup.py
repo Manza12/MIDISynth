@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="MIDISynth",
-    version="0.0.5",
+    version="0.0.7",
     author="Gonzalo Romero-García",
     author_email="tritery@hotmail.com",
     description="A package for synthesizing audio from MIDI.",
