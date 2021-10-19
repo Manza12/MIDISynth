@@ -87,6 +87,6 @@ def plot_time_frequency(a, t, f, v_min=0, v_max=1, c_map='Greys', fig_title=None
             raise Exception("Backend not supported.")
 
     if show:
-        plt.show()
+        plt.show(block=False)
 
     return fig

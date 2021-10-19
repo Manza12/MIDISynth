@@ -122,6 +122,9 @@ def get_amplitudes(amplitude_string: str, number_harmonics: int) -> np.ndarray:
                                                         number_harmonics + 1, 
                                                         1)**2
         return amplitude_harmonics
+    elif amplitude_string == 'constant':
+        amplitude_harmonics: np.ndarray = np.ones(number_harmonics)
+        return amplitude_harmonics
     raise ValueError("Parameter amplitude_string should be one of: "
                      "'inverse_square'.")
 
