@@ -1,9 +1,9 @@
 from distutils.core import setup
 
 setup(
-    name="MIDI-Synth",
-    packages=['MIDI-Synth'],
-    version="0.0.10",
+    name="MIDISynth",
+    packages=['MIDISynth'],
+    version="0.0.11",
     license='MIT',
     description="A package for synthesizing audio from MIDI.",
     author="Gonzalo Romero-García",
