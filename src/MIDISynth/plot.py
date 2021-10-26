@@ -1,12 +1,10 @@
 from datetime import time as tm
 import math
-import numpy as np
 
 import matplotlib.pyplot as plt
 import matplotlib.ticker as tick
 
-from .music import Piece, Note
-from .utils import midi_to_hertz, frequency_to_notes
+from .utils import frequency_to_notes
 
 
 def format_freq(x, pos, f, freq_type='int', freq_names=None, plot_units=False):
@@ -53,7 +51,7 @@ def format_time(x, pos, t, plot_units=False):
 
 
 def plot_time_frequency(a, t, f, v_min=0, v_max=1, c_map='Greys',
-                        fig_title=None, show=True, numpy=True,
+                        fig_title=None, show=True, block=True, numpy=True,
                         full_screen=False, fig_size=(640, 480),
                         freq_type='int',
                         freq_label='Frequency (Hz)', time_label='Time (s)',
@@ -101,13 +99,13 @@ def plot_time_frequency(a, t, f, v_min=0, v_max=1, c_map='Greys',
             raise Exception("Backend not supported.")
 
     if show:
-        plt.show(block=False)
+        plt.show(block=block)
 
     return fig
 
 
 def plot_piano_roll(piano_roll, frequency_vector, time_vector, name="",
-                    full_screen=False):
+                    full_screen=False, show=True, block=False):
     notes_vector = frequency_to_notes(frequency_vector)
 
     fig = plot_time_frequency(piano_roll, time_vector, frequency_vector,
@@ -116,5 +114,8 @@ def plot_piano_roll(piano_roll, frequency_vector, time_vector, name="",
                               freq_type='str', freq_label='Notes',
                               freq_names=notes_vector,
                               full_screen=full_screen)
+
+    if show:
+        plt.show(block=block)
 
     return fig
