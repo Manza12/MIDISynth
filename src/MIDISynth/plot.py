@@ -113,9 +113,7 @@ def plot_piano_roll(piano_roll, frequency_vector, time_vector, name="",
                               v_min=0, v_max=128, c_map='Greys',
                               freq_type='str', freq_label='Notes',
                               freq_names=notes_vector,
-                              full_screen=full_screen)
-
-    if show:
-        plt.show(block=block)
+                              full_screen=full_screen,
+                              block=block, show=show)
 
     return fig
